@@ -8,13 +8,13 @@ def r_unpack(x):
         for i in x:
             try:
                 if len(i) == 1:
-                    i = i[0]
+                    i = i[0] # unpack single element lists
                     unpacked.append(i)
                 else:
                     unpacked.extend(r_unpack(i))
-            except TypeError:
+            except TypeError: # no length or can't unpack
                 unpacked.append(i)
-    except TypeError:
+    except TypeError: # can't be iterated
         unpacked.append(x)
     
     return unpacked        
@@ -22,7 +22,7 @@ def r_unpack(x):
 def substring(x, y):
     ''' return shortest substring of x from set y '''
 
-    y = set(
+    y = set( # turn any input into a set of single characters
         r_unpack(
             [str(s) for s in r_unpack(y)]
             )
@@ -43,8 +43,8 @@ def substring(x, y):
                 break
 
     if len(y_confirm) == 0:
-        low = substring(x[i0+1:], y)
-        if low != None and len(low) < (i1+1 - i0):
+        low = substring(x[i0+1:], y) # test rest of string for shorter occurences
+        if low != None and len(low) < (i1+1 - i0): # test matches against current
             return low
         else:
             return x[i0:i1+1]
