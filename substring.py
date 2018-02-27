@@ -50,4 +50,3 @@ def substring(x, y):
             return x[i0:i1+1]
     else:
         return None
-        
